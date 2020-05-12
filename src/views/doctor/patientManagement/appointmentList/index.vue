@@ -47,11 +47,11 @@ export default {
   },
   mounted(){
     this.loading = true;
-    this.interval = null
-    this.interval = setInterval(() => {
-        this.getAppointRecordList()
-    }, 1000);
-    // this.getAppointRecordList()
+    // this.interval = null
+    // this.interval = setInterval(() => {
+    //     this.getAppointRecordList()
+    // }, 1000);
+    this.getAppointRecordList()
   },
   methods: {
     getAppointRecordList() {

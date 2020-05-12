@@ -26,12 +26,14 @@ export default {
         this.getDoctors(this.depName) 
     },
     methods: {
+        // 获取该科室下的医生信息
         getDoctors(depName){
              this.$store.dispatch('patient/getDepOfDoctor', depName).then((data) => {
                  let { name,doctors } = data
                  this.cardList = doctors
              })
         },
+        // 选择医生，跳转到选择就诊时间段的页面
         selectDoc(doctorName,pay){
             this.$store.commit("patient/setDoctorNameAndPay",{ doctorName, pay })
             this.$router.push({path:'/registration/selectTime'})

@@ -57,7 +57,7 @@
           <label>居住地址:</label>
           <span>{{medicalRecord.patientMsg.region}}</span>
         </div>
-         <div class="medicalRecord-item" style="width: 800px">
+        <div class="medicalRecord-item" style="width: 800px">
           <label>科别：</label>
           <span>{{medicalRecord.doctorDiagnosis.depName}}</span>
         </div>
@@ -118,6 +118,7 @@ export default {
     // this.getMedicalRecordList()
   },
   methods: {
+    // 获取患者病历信息
     getMedicalRecordList() {
       getMedicalRecordList({ patientName: this.patientNameSearch })
         .then(res => {
@@ -175,3 +176,20 @@ export default {
   }
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

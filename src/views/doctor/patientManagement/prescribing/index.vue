@@ -163,6 +163,7 @@ export default {
       this.ruleForm.drugs.usage = row.usage;
       this.drugDialogVisible = false;
     },
+    // 医生提交诊断信息
     submitHandle() {
       let medicalData = {
         patientMsg: this.patientDetail,
@@ -173,7 +174,6 @@ export default {
       postMedicalRecord(medicalData)
         .then(res => {
           if (res.data.resCode === 1) {
-           
             // console.log("提交病历成功")
             makeAnAppointment({
               patientName: this.patientName,
@@ -182,19 +182,18 @@ export default {
             })
               .then(res => {
                 if (res.data.resCode === 1) {
-                 
                   // console.log("修改预约成功")
                   postMedicalPay({
                     payUsername: this.patientName,
                     createTime: new Date().toLocaleString(),
                     TCMTreatmentPay: 10,
-                    drugPay: 200
+                    drugPay: 200,
+                    depName: this.$route.query.depName
                   })
                     .then(res => {
                       if (res.data.resCode === 1) {
                         // console.log("提交诊间缴费成功")
                         this.$router.push({ path: "/doctor/appointmentList" });
-                        
                       }
                     })
                     .catch(error => {

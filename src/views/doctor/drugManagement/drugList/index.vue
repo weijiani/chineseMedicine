@@ -75,6 +75,7 @@ export default {
   },
   mounted() {},
   methods: {
+    // 获取药方模板
     getDragList() {
       getDragList({ username: getUserName() })
         .then(res => {
@@ -94,6 +95,7 @@ export default {
         return;
       }
     },
+    // 删除药方模板
     deleteDrug(data) {
       deleteDrug(data)
         .then(res => {
@@ -115,6 +117,7 @@ export default {
       this.form = data;
       this.drugDialogVisible = true;
     },
+    // 修改药方模板
     modifiedSure() {
       uptateDrug(this.form)
         .then(res => {
@@ -132,7 +135,7 @@ export default {
           console.log("uptateDrug", error);
           reject(error);
         });
-    }
+    },
   }
 };
 </script>

@@ -67,6 +67,20 @@ const doctorRoutes = [
                 meta: { title: '病历查询', icon: 'table' }
             }
         ]
+    },
+    {
+        path: '/customer',
+        component: Layout,
+        redirect: '/customer/customerList',
+        name: 'Example',
+        children: [
+            {
+                path: 'medicalRecordCheck',
+                name: 'medicalRecordCheck',
+                component: () => import('@/views/doctor/customerManagement/index'),
+                meta: { title: '客户列表', icon: 'table' }
+            }
+        ]
     }
 ]
 

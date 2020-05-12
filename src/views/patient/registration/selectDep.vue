@@ -66,6 +66,7 @@ export default {
             }
         },
     methods: {
+        //选择科室名称，跳转到选择医生页面
         selectDep(depName){
             this.$store.commit("patient/setDepName",depName)
             this.$router.push({path: '/registration/selectDoc'})

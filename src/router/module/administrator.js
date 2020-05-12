@@ -3,35 +3,31 @@ const administratorRoutes = [
     {
         path: '/administrator',
         component: Layout,
-        redirect: '/administrator/dashboard',
-        children: [{
-            path: 'dashboard',
-            name: 'Dashboard',
-            component: () => import('@/views/administrator/dashboard/index'),
-            meta: { title: '管理者', icon: 'dashboard' }
-        }]
-    }
-    // {
-    //     path: '/example',
-    //     component: Layout,
-    //     redirect: '/example/table',
-    //     name: 'Example',
-    //     meta: { title: 'Example', icon: 'example' },
-    //     children: [
-    //         {
-    //             path: 'table',
-    //             name: 'Table',
-    //             component: () => import('@/views/administrator/table/index'),
-    //             meta: { title: 'Table', icon: 'table' }
-    //         },
-    //         {
-    //             path: 'tree',
-    //             name: 'Tree',
-    //             component: () => import('@/views/administrator/tree/index'),
-    //             meta: { title: 'Tree', icon: 'tree' }
-    //         }
-    //     ]
-    // }
+        redirect: '/administrator/businessData',
+        name: 'Example',
+        meta: { title: '运营数据', icon: 'example' },
+        children: [
+            {
+                path: 'businessData',
+                name: 'businessData',
+                component: () => import('@/views/administrator/operationManagement/businessData/index'),
+                meta: { title: '营业额数据', icon: 'table' }
+            },
+            {
+                path: 'doctorPerformance',
+                name: 'doctorPerformance',
+                component: () => import('@/views/administrator/operationManagement/doctorPerformance/index'),
+                meta: { title: '医生业绩', icon: 'tree' }
+            },
+            {
+                path: 'patientSituation',
+                name: 'patientSituation',
+                component: () => import('@/views/administrator/operationManagement/patientSituation/index'),
+                meta: { title: "患者情况", icon: 'tree' }
+            }
+        ]
+    },
+   
 ]
 
 export default administratorRoutes
