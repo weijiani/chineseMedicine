@@ -42,7 +42,6 @@
         </el-form-item>
         <!-- 提交 -->
         <el-form-item>
-          <el-button type="primary">预览</el-button>
           <el-button type="primary" @click="submitHandle">提交</el-button>
         </el-form-item>
       </el-form>
@@ -74,6 +73,7 @@
 import { getUserDetail, makeAnAppointment } from "@/api/patient";
 import { getDragList, postMedicalRecord, postMedicalPay } from "@/api/doctor";
 import { getUserName } from "@/utils/auth";
+import { Message } from 'element-ui'
 export default {
   data() {
     return {
@@ -108,10 +108,6 @@ export default {
         diagnosis: [
           { required: true, message: "请输入患者诊断结果", trigger: "blur" }
         ]
-        // ingredient: [
-        //   { required: true, message: "请输入处方成分", trigger: "blur" }
-        // ],
-        // usage: [{ required: true, message: "请输入处方用法", trigger: "blur" }]
       },
       drugDialogVisible: false,
       dragList: []
@@ -121,6 +117,11 @@ export default {
   created() {},
   mounted() {
     if (!this.$route.query.patientName) {
+        Message({
+          message: '请先选择病人！',
+          type: 'error',
+          duration: 3 * 1000
+      })
       this.$router.push({ path: "/doctor/appointmentList" });
       return false;
     }
@@ -138,7 +139,7 @@ export default {
       getUserDetail(postData)
         .then(res => {
           let patientDetail = res.data.userDetail[0];
-          this.patientDetail = patientDetail;
+          this.patientDetail = patientDetail
         })
         .catch(error => {
           console.log("getUserDetail", error);

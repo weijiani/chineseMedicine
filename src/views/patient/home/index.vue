@@ -12,6 +12,8 @@
     </div>
 </template>
 <script>
+import { getUserName } from "@/utils/auth";
+import { Message } from "element-ui";
 export default {
     data(){
         return{
@@ -41,7 +43,29 @@ export default {
     },
     methods: {
         cardClick(path){
-            this.$router.push({path: path})
+            if(path=='/registration/selectDep'){
+                 let username = getUserName();
+                 this.$store.dispatch("patient/getAppointRecordList", username)
+                .then(data => {
+                if (data.resCode == 1) {
+                    let appointRecordList = data.appointRecordList.filter((item, index) => {
+                        return item.overFlag == false;
+                     });
+                     if(appointRecordList.length==0){
+                         this.$router.push({path: path})
+                     }else{
+                          Message({
+                            message: "您已经预约！",
+                            type: "error",
+                            duration: 3 * 1000
+                        });
+                         
+                     }
+                  }
+                });
+            }else{
+              this.$router.push({path: path})
+            }
         }
     }
 }

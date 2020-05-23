@@ -1,25 +1,21 @@
 import router from './router'
 import store from './store'
 import { Message } from 'element-ui'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
-import { getToken, getRole } from '@/utils/auth' // get token from cookie
-import getPageTitle from '@/utils/get-page-title'
+import NProgress from 'nprogress' 
+import 'nprogress/nprogress.css' 
+import { getToken, getRole } from '@/utils/auth' 
+import { resetRouter } from '@/router'
+
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
-  // start progress bar
   NProgress.start()
-
-  // set page title
-  // document.title = getPageTitle(to.meta.title)
-
-  // determine whether the user has logged in
   const hasToken = getToken()
   const role = getRole()
+ 
   if (hasToken) {
     if (to.path === '/login'|| to.path === '/'|| to.path=="/login/login") {
       switch (role) {
@@ -37,6 +33,7 @@ router.beforeEach(async(to, from, next) => {
       }
       NProgress.done()
     } else {
+      router.options.routes = resetRouter(role)
       next()
       NProgress.done()
     }

@@ -34,6 +34,7 @@
 <script>
 import { getAppointRecordList } from "@/api/patient";
 import { getUserName } from "@/utils/auth";
+import { correctList } from "./utils"
 export default {
   data() {
     return {
@@ -47,17 +48,20 @@ export default {
   },
   mounted(){
     this.loading = true;
-    // this.interval = null
-    // this.interval = setInterval(() => {
-    //     this.getAppointRecordList()
-    // }, 1000);
-    this.getAppointRecordList()
+    this.interval = null
+    this.interval = setInterval(() => {
+        this.getAppointRecordList()
+    }, 1000);
+    // this.getAppointRecordList()
   },
   methods: {
     getAppointRecordList() {
       getAppointRecordList({ doctorName: getUserName() })
         .then(res => {
-          this.appointList = res.data.appointRecordList;
+          let appointList = res.data.appointRecordList.filter((item,index)=>{
+            return item.overFlag == false;
+          });
+          this.appointList = correctList(appointList)
           this.loading = false;
         })
         .catch(error => {
@@ -65,12 +69,6 @@ export default {
           reject(error);
         });
     }, 
-    // timeoutHandle(fun,time){
-    //   let timeout = null
-    //    timeout = setTimeout(() => {
-    //      fun()
-    //    }, time);
-    // },
     prescribing(row, column, cell, event) {
       if(row.overFlag) return false
       this.$router.push({

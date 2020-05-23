@@ -25,7 +25,7 @@ let locale = new Date().toLocaleString(); //"2020/4/23 下午10:49:23"
 
 function getDate(index) {
     var time = new Date().getTime() + parseInt(index) * 86400000;
-    var date = new Date(time).toLocaleString().replace(/\//g, '-').split(" ")[0].toString();
+    var date = new Date(time).toLocaleString().split(" ")[0].toString();
     return date;
 }
 
@@ -64,4 +64,15 @@ export function isSecondOverTime() {
 export function getCurrentTime() {
     console.log("gettime被调用了")
     return locale
+}
+
+export function formatDateTime() {
+    var date = new Date();
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    var h = date.getHours().toString();
+    var minute = date.getMinutes().toString();
+    var second = date.getSeconds().toString();
+    return `${y}-${m}-${d} ${h.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}`
 }

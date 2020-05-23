@@ -4,7 +4,7 @@
 
 export function getOption(data) {
     let option = {
-        title: { text: '本年度医生业绩',
+        title: { text: '本年度医生诊断人数',
         textStyle: {
             color: 'rgb(21, 172, 126)'
         }

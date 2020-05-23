@@ -48,7 +48,8 @@ import {
   getCurrentDay,
   getDayafterTomorrow,
   isFirstOverTime,
-  isSecondOverTime
+  isSecondOverTime,
+  formatDateTime
 } from "@/utils/getTime";
 export default {
   data() {
@@ -132,7 +133,7 @@ export default {
           treatTime: this.$store.getters.treatTime,
           pay: this.$store.getters.doctorPay,
           payWay: this.payWay,
-          createTime: new Date().toLocaleString(),
+          createTime: formatDateTime(),
           payDes: "预约",
           overFlag: false
         };
@@ -142,7 +143,7 @@ export default {
             if (data.resCode == 1) {
               let payData = {
                 username: getUserName(),
-                createTime: new Date().toLocaleString(),
+                createTime: formatDateTime(),
                 pay: this.$store.getters.doctorPay,
                 payWay: submitMsg.payWay,
                 payDes: "预约",

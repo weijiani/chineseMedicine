@@ -108,7 +108,7 @@ export default {
     return {
       loading: false,
       medicalRecordList: [],
-      patientNameSearch: "user2",
+      patientNameSearch: "",
       dialogVisible: false,
       medicalRecord: null
     };
